@@ -6,7 +6,7 @@ exports.createTodo = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       boardId: req.body.boardId,
-      userId: req.user.uid,
+      userId: req.user.id,
       completed: req.body.completed || false,
     });
     res.status(201).json(todo);
@@ -20,7 +20,7 @@ exports.getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({
       boardId: req.params.boardId,
-      userId: req.user.uid,
+      userId: req.user.id,
     });
     res.json(todos);
   } catch (error) {
@@ -32,7 +32,7 @@ exports.getTodos = async (req, res) => {
 exports.updateTodo = async (req, res) => {
   try {
     const todo = await Todo.findOneAndUpdate(
-      { _id: req.params.id, userId: req.user.uid },
+      { _id: req.params.id, userId: req.user.id },
       {
         title: req.body.title,
         description: req.body.description,
@@ -51,7 +51,7 @@ exports.deleteTodo = async (req, res) => {
   try {
     await Todo.findOneAndDelete({
       _id: req.params.id,
-      userId: req.user.uid,
+      userId: req.user.id,
     });
     res.json({ message: "Todo deleted" });
   } catch (error) {

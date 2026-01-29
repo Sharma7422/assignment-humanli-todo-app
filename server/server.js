@@ -10,6 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Authentication routes (no auth middleware needed)
+app.use("/api/auth", require("./routes/authRoutes"));
+
+// Protected routes
 app.use("/api/boards", require("./routes/boardRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
 

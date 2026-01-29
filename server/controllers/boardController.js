@@ -4,7 +4,7 @@ exports.createBoard = async (req, res) => {
   try {
     const board = await Board.create({
       name: req.body.name,
-      userId: req.user.uid,
+      userId: req.user.id,
     });
     res.status(201).json(board);
   } catch (error) {
@@ -15,7 +15,7 @@ exports.createBoard = async (req, res) => {
 
 exports.getBoards = async (req, res) => {
   try {
-    const boards = await Board.find({ userId: req.user.uid });
+    const boards = await Board.find({ userId: req.user.id });
     res.json(boards);
   } catch (error) {
     console.error(error);
@@ -26,7 +26,7 @@ exports.getBoards = async (req, res) => {
 exports.updateBoard = async (req, res) => {
   try {
     const board = await Board.findOneAndUpdate(
-      { _id: req.params.id, userId: req.user.uid },
+      { _id: req.params.id, userId: req.user.id },
       { name: req.body.name },
       { new: true }
     );
@@ -41,7 +41,7 @@ exports.deleteBoard = async (req, res) => {
   try {
     await Board.findOneAndDelete({
       _id: req.params.id,
-      userId: req.user.uid,
+      userId: req.user.id,
     });
     res.json({ message: "Board deleted" });
   } catch (error) {
