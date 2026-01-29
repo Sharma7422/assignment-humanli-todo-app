@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBoards, createBoard, updateBoard, deleteBoard } from "../api/axios";
 import BoardList from "../components/BoardList";
+import TodoList from "../components/TodoList";
 import "./Dashboard.css";
 
 function Dashboard({ handleLogout }) {
@@ -12,6 +13,7 @@ function Dashboard({ handleLogout }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
   const userEmail = localStorage.getItem("userEmail");
 
   useEffect(() => {
@@ -118,10 +120,7 @@ function Dashboard({ handleLogout }) {
 
         <div className="right-panel">
           {selectedBoard ? (
-            <div className="board-selected">
-              <h2>{selectedBoard.name}</h2>
-              <p>Select a todo from the left or create a new one</p>
-            </div>
+            <TodoList boardId={selectedBoard._id} token={token} />
           ) : (
             <div className="no-board-selected">
               <p>📌 Select a board to manage todos</p>
