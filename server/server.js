@@ -10,12 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Authentication routes (no auth middleware needed)
-app.use("/api/auth", require("./routes/authRoutes"));
 
-// Protected routes
+app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/boards", require("./routes/boardRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
 
-const PORT = process.env.PORT || 8301;
+const PORT = process.env.PORT || 3456;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
