@@ -56,7 +56,7 @@ export const deleteBoard = (boardId) => {
   return API.delete(`/boards/${boardId}`);
 };
 
-//  Todo APIs 
+// ===== TODO APIs =====
 export const createTodo = (payload) => {
   return API.post("/todos", payload);
 };
