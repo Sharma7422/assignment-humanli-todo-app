@@ -3,7 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
-dotenv.config();
+// Load .env file
+const envConfig = dotenv.config();
 connectDB();
 
 const app = express();
@@ -15,5 +16,6 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/boards", require("./routes/boardRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
 
-const PORT = process.env.PORT || 3456;
+
+const PORT = envConfig.parsed.PORT || 8301;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
